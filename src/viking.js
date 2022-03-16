@@ -1,8 +1,8 @@
 // Soldier
 class Soldier {
   constructor (health, strength){
-   this.health = 300;
-   this.strength = 150; 
+   this.health = health;
+   this.strength = strength; 
   }
   attack (){
     return this.strength;
@@ -10,8 +10,8 @@ class Soldier {
 
   //should remove the received damage from the health property
   receiveDamage (damage){
-    let receivedDamage = 50;
-    this.health = this.health - receivedDamage;
+    let receivedDamage = 0;
+    this.health = this.health - damage;
 return;
   }
 
@@ -29,12 +29,13 @@ class Viking extends Soldier{
   //should remove the received damage from health property
   //should return "NAME has received DAMAGE points of damage"; if the Viking is still alive.
   receiveDamage (damage){
-    let receivedDamage = 50;
-    this.health = this.health - receivedDamage;
-    if (this.health <=receivedDamage){
-    return `${this.name} has received ${damage} points of damage`;
+    
+    this.health = this.health - damage;
+    if (!this.health){
+      return `${this.name} has died in act of combat`;
+    
     } else {
-    return `${this.name} has died in act of combat`;
+      return `${this.name} has received ${damage} points of damage`;
     }
   } 
   battleCry (){
@@ -55,18 +56,18 @@ class Viking extends Soldier{
 
      //this method needs to be reimplemented
     receiveDamage (damage){
-      let receivedDamage = 50;
-      this.health = this.health - receivedDamage;
-      if (this.health <=receivedDamage){
-        return `Saxon has received ${this.health} points of damage`;
-        } else {
-        return `${this.name} has died in act of combat`;
-        
+      this.health = this.health - damage;
+    if (!this.health){
+      return `A Saxon has died in combat`;
+    
+    } else {
+      return `A Saxon has received ${damage} points of damage`;
+    }   
 }}
-}
+
 
 // War
-class War {
+   class War {
   constructor (){
   this.vikingArmy= [];
   this.saxonArmy= [];
@@ -86,7 +87,7 @@ addSaxon(saxonObject){
   const vikingsArmiesAttack= this.vikingArmy[Math.floor(Math.random()*this.vikingArmy.length)];
   const saxonArmiesAttack= this.saxonArmy[Math.floor(Math.random()*this.saxonArmy.length)];
   
-  return vikingsArmiesAttack.receiveDamage = saxonArmiesAttack.strength;
+  return vikingsArmiesAttack.damage = saxonArmiesAttack.strength;
  
   }
  saxonAttack(){
